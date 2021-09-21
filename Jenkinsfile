@@ -3,7 +3,7 @@ import java.text.SimpleDateFormat
 def dateFormat = new SimpleDateFormat("yyyyMMddHHmm")
 def date = new Date()
 def timestamp = dateFormat.format(date).toString()
-def EMAILS = "arcadiobuelvas@gmail.com"
+def EMAILS = "arcadio.buelvas@sagepub.com"
 
 pipeline{
 	agent any
@@ -14,7 +14,7 @@ pipeline{
 		 	{
 				checkout([$class: 'GitSCM', branches: [[name: "master"]],
                 doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [
-                [credentialsId: "1f4d4be1-3c3c-4a92-89cd-03fde9048f83", url:"https://github.com/ArcadioGitHub/CI.git"]
+                [credentialsId: "vantageAutomation", url:"https://github.com/ArcadioGitHub/Vantage_Automation.git"]
                 ]])
 			}
 		}
