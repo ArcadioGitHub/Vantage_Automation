@@ -1,0 +1,53 @@
+{
+  "dev": {
+    "instructor": {
+      "role":"instructor",
+      "email":"AutomationInstructorDev@gmail.com",
+      "title":"Dr",
+      "firstName": "AutomationInstructorDev",
+      "lastName":"lastName",
+      "country":"United States",
+      "institution":"SAGE Institution",
+      "department":"Editorial",
+      "password":"Test123!"
+    },
+    "student": {
+      "role": "student",
+      "userName": "AutomationStudentDev",
+      "email": "AutomationStudentDev@gmail.com",
+      "firstName": "AutomationStudentDev",
+      "lastName":"lastName",
+      "country":"United States",
+      "password":"Test123!"
+    },
+    "coordinator": {
+      "name": "TestUser"
+    }
+  },
+
+  "staging":{
+    "instructor": {
+      "role":"instructor",
+      "email":"AutomationInstructorStaging@gmail.com",
+      "title":"Dr",
+      "firstName": "AutomationInstructorStaging",
+      "lastName":"lastName",
+      "country":"United States",
+      "institution":"SAGE Institution",
+      "department":"Editorial",
+      "password":"Test123!"
+    },
+    "student": {
+      "role": "student",
+      "userName": "AutomationStudentStaging",
+      "email": "AutomationStudentStaging@gmail.com",
+      "firstName": "AutomationStudentStaging",
+      "lastName":"lastName",
+      "country":"United States",
+      "password":"Test123!"
+    },
+    "coordinator": {
+      "name": "TestUser"
+    }
+  }
+}

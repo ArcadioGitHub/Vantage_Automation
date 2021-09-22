@@ -23,9 +23,9 @@ pipeline{
 			steps {
 				script {
 					try {
-						bat ("gradle clean test aggregate  -Denvironment=dev  -Dcontext=chrome -Dwebdriver.driver=chrome -Dinjected.tags=browser:chrome")
+						bat ("gradle clean test aggregate  -Denvironment=staging  -Dcontext=chrome -Dwebdriver.driver=chrome -Dinjected.tags=browser:chrome")
 						echo 'TESTS IN CHROME EXECUTED SUCCESSFULLY'
-						bat ("gradle test aggregate  -Denvironment=dev  -Dcontext=firefox -Dwebdriver.driver=firefox -Dinjected.tags=browser:firefox")
+						bat ("gradle test aggregate  -Denvironment=staging  -Dcontext=firefox -Dwebdriver.driver=firefox -Dinjected.tags=browser:firefox")
 						echo 'TESTS IN FIREFOX EXECUTED SUCCESSFULLY'
 						currentBuild.result = 'SUCCESS'
 					}

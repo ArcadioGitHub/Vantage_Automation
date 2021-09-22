@@ -1,7 +1,7 @@
 package Definitions;
 
-import Models.User;
 import PageObjects.AppPage;
+import cucumber.api.java.After;
 import cucumber.api.java.Before;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
@@ -17,9 +17,15 @@ public class VantageHomePageDefinitions {
     @Before
     public void setup() {
         appPage.getEnvAndUserData();
+        appPage.setup();
     }
 
-    @Given("^the user goes to the staging/Live  page$")
+    @After
+    public void closeBrowser(){
+        appPage.closeBrowser();
+    }
+
+    @Given("^the user goes to the staging/Live page$")
     public void theUserGoesToTheStagingLivePage() {
         appPage.goToHome();
     }
