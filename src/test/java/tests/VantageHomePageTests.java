@@ -12,14 +12,14 @@ public class VantageHomePageTests extends AppPage {
     VantageHomePage vantageHomePage;
 
     public void checkingPageElementsLoad(){
-        Assert.assertTrue(vantageHomePage.userNameOrEmail.isDisplayed());
-        Assert.assertTrue(vantageHomePage.password.isDisplayed());
-        Assert.assertTrue(vantageHomePage.forgotPassword.isDisplayed());
-        Assert.assertTrue(vantageHomePage.needHelp.isDisplayed());
-        Assert.assertTrue(vantageHomePage.loginButton.isDisplayed());
-        Assert.assertTrue(vantageHomePage.registerButton.isDisplayed());
-        Assert.assertTrue(vantageHomePage.signupButton.isDisplayed());
-        Assert.assertTrue(vantageHomePage.findMyRepButton.isDisplayed());
+        Assert.assertTrue(vantageHomePage.tfield_UserNameOrEmail.isDisplayed());
+        Assert.assertTrue(vantageHomePage.tfield_Password.isDisplayed());
+        Assert.assertTrue(vantageHomePage.lnk_ForgotPassword.isDisplayed());
+        Assert.assertTrue(vantageHomePage.lnk_NeedHelp.isDisplayed());
+        Assert.assertTrue(vantageHomePage.btn_Login.isDisplayed());
+        Assert.assertTrue(vantageHomePage.btn_Register.isDisplayed());
+        Assert.assertTrue(vantageHomePage.btn_SignUp.isDisplayed());
+        Assert.assertTrue(vantageHomePage.btn_FindMyRep.isDisplayed());
     }
 
 

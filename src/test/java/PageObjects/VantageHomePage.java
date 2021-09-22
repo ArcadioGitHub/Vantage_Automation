@@ -6,26 +6,26 @@ import org.openqa.selenium.support.FindBy;
 public class VantageHomePage extends AppPage {
 
     @FindBy(id = "UserNameOrEmail")
-    public WebElementFacade userNameOrEmail;
+    public WebElementFacade tfield_UserNameOrEmail;
 
     @FindBy(id = "Password")
-    public WebElementFacade password;
+    public WebElementFacade tfield_Password;
 
     @FindBy(xpath = "//a[text()='Forgot password?']")
-    public WebElementFacade forgotPassword;
+    public WebElementFacade lnk_ForgotPassword;
 
     @FindBy(xpath = "//a[text()='Need help?']")
-    public WebElementFacade needHelp;
+    public WebElementFacade lnk_NeedHelp;
 
     @FindBy(id = "btnSubmit")
-    public WebElementFacade loginButton;
+    public WebElementFacade btn_Login;
 
     @FindBy(xpath = "//a[@class='button btn-tertiary' and text()='register']")
-    public WebElementFacade registerButton;
+    public WebElementFacade btn_Register;
 
     @FindBy(xpath = "//a[@class='button btn-tertiary' and text()='sign up']")
-    public WebElementFacade signupButton;
+    public WebElementFacade btn_SignUp;
 
     @FindBy(xpath = "//a[@class='button btn-tertiary find-my-rep']")
-    public WebElementFacade findMyRepButton;
+    public WebElementFacade btn_FindMyRep;
 }

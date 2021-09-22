@@ -35,4 +35,24 @@ public class VantageRegisterPageDefinitions {
     public void theUserShouldSeeTheWelcomeMessage(String role) {
         vantageRegisterPageTests.checkingWelcomeMessages(role);
     }
+
+    @When("^the user tries to register with no User Name and Email address (.*)$")
+    public void theUserTriesToRegisterWithNoUserNameAndEmailAddress(String role) {
+        vantageRegisterPageTests.registeringAsAnStudentOrInstructorWithNotUserNameAndEmailAddress(role);
+    }
+
+    @Then("^the user should see required field warnings according to his (.*)$")
+    public void theUserShouldSeeRequiredFieldWarnings(String role) {
+        vantageRegisterPageTests.checkingWarningLabelsForUserNameAndEmailAddress(role);
+    }
+
+    @When("^the user tries to register with no data on the Registration-Form (.*)$")
+    public void theUserTriesToRegisterWithNoDataOnTheRegistrationForm(String role) {
+        vantageRegisterPageTests.registeringAsAnStudentOrInstructorWithNoDataOnRegistrationForm(role);
+    }
+
+    @Then("^the user should see the required field warnings on the registration-form according to his (.*)$")
+    public void theUserShouldSeeTheRequiredFieldWarningsOnTheRegistrationForm(String role) {
+        vantageRegisterPageTests.checkingWarningLabelsOfTheRegistrationForm(role);
+    }
 }
