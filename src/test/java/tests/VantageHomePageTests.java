@@ -22,5 +22,11 @@ public class VantageHomePageTests extends AppPage {
         Assert.assertTrue(vantageHomePage.btn_FindMyRep.isDisplayed());
     }
 
+    public void login(String user, String password){
+        vantageHomePage.tfield_UserNameOrEmail.type(user);
+        vantageHomePage.tfield_Password.type(password);
+        vantageHomePage.btn_Login.click();
+    }
+
 
 }

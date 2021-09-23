@@ -10,19 +10,24 @@ import net.serenitybdd.core.Serenity;
 import org.jetbrains.annotations.NotNull;
 import org.junit.Assert;
 
-import java.util.Date;
+import java.util.Calendar;
 
 public class VantageRegisterPageTests extends AppPage {
 
     VantageHomePage vantageHomePage;
     VantageRegisterPage vantageRegisterPage;
+    public static String instructorEmail;
+    public static String studentName;
+    public static String studentLastName;
 
-    Date date = new Date();
-    String alias = String.valueOf(date.getTime());
+    Calendar calendar = Calendar.getInstance();
+    String alias = String.valueOf(calendar.getTimeInMillis());
 
     public void registerUser(@NotNull String role){
         switch(role) {
             case "student":
+                studentName = Student.getFirstName().concat(alias);
+                studentLastName = Student.getLastName().concat(alias);
                 waitFor(vantageHomePage.btn_Register).waitUntilClickable();
                 vantageHomePage.btn_Register.click();
                 vantageRegisterPage.tfield_UserName.type(Student.getUserName().concat(alias));
@@ -33,8 +38,8 @@ public class VantageRegisterPageTests extends AppPage {
                 Assert.assertTrue(vantageRegisterPage.lbl_RegisterAsStudent.isDisplayed());
                 Serenity.takeScreenshot();
                 waitFor(vantageRegisterPage.tfield_FirstName).waitUntilVisible();
-                vantageRegisterPage.tfield_FirstName.type(Student.getFirstName().concat(alias));
-                vantageRegisterPage.tfield_LastName.type(Student.getLastName().concat(alias));
+                vantageRegisterPage.tfield_FirstName.type(studentName);
+                vantageRegisterPage.tfield_LastName.type(studentLastName);
                 vantageRegisterPage.sldr_Country.selectByVisibleText(Student.getCountry());
                 vantageRegisterPage.tfield_Password.type(Student.getPassword());
                 vantageRegisterPage.tfield_ConfirmPassword.type(Student.getPassword());
@@ -46,10 +51,11 @@ public class VantageRegisterPageTests extends AppPage {
                 break;
 
             case "instructor":
+                instructorEmail = alias.concat(Instructor.getEmail());
                 waitFor(vantageHomePage.btn_SignUp).waitUntilClickable();
                 vantageHomePage.btn_SignUp.click();
-                vantageRegisterPage.tfield_Email.type(alias.concat(Instructor.getEmail()));
-                vantageRegisterPage.tfield_ReEnterEmail.type(alias.concat(Instructor.getEmail()));
+                vantageRegisterPage.tfield_Email.type(instructorEmail);
+                vantageRegisterPage.tfield_ReEnterEmail.type(instructorEmail);
                 Serenity.takeScreenshot();
                 vantageRegisterPage.btn_Register.click();
                 Assert.assertTrue(vantageRegisterPage.lbl_RegisterAsInstructor.isDisplayed());
@@ -104,6 +110,7 @@ public class VantageRegisterPageTests extends AppPage {
     public void registeringAsAnStudentOrInstructorWithNoDataOnRegistrationForm(@NotNull String role){
         switch(role) {
             case "student":
+                Student.setPassword("ABCDE");
                 waitFor(vantageHomePage.btn_Register).waitUntilClickable();
                 vantageHomePage.btn_Register.click();
                 vantageRegisterPage.tfield_UserName.type(Student.getUserName().concat(alias));
@@ -113,6 +120,8 @@ public class VantageRegisterPageTests extends AppPage {
                 vantageRegisterPage.btn_Register.click();
                 Assert.assertTrue(vantageRegisterPage.lbl_RegisterAsStudent.isDisplayed());
                 Serenity.takeScreenshot();
+                vantageRegisterPage.tfield_Password.type(Student.getPassword());
+                vantageRegisterPage.tfield_ConfirmPassword.type(Student.getPassword());
                 Assert.assertTrue(vantageRegisterPage.tfield_UserName.getAttribute("readonly").equals("true"));
                 Assert.assertTrue(vantageRegisterPage.tfield_Email.getAttribute("readonly").equals("true"));
                 Assert.assertTrue(vantageRegisterPage.tfield_UserName.getValue().contains(Student.getUserName()));
@@ -121,6 +130,7 @@ public class VantageRegisterPageTests extends AppPage {
                 break;
 
             case "instructor":
+                Instructor.setPassword("ABCDE");
                 waitFor(vantageHomePage.btn_SignUp).waitUntilClickable();
                 vantageHomePage.btn_SignUp.click();
                 vantageRegisterPage.tfield_Email.type(alias.concat(Instructor.getEmail()));
@@ -129,6 +139,8 @@ public class VantageRegisterPageTests extends AppPage {
                 vantageRegisterPage.btn_Register.click();
                 Assert.assertTrue(vantageRegisterPage.lbl_RegisterAsInstructor.isDisplayed());
                 Serenity.takeScreenshot();
+                vantageRegisterPage.tfield_Password.type(Instructor.getPassword());
+                vantageRegisterPage.tfield_ConfirmPassword.type(Instructor.getPassword());
                 Assert.assertTrue(vantageRegisterPage.tfield_Email.getAttribute("readonly").equals("true"));
                 Assert.assertTrue(vantageRegisterPage.tfield_Email.getValue().contains(Instructor.getEmail()));
                 vantageRegisterPage.btn_Register.click();
@@ -137,14 +149,13 @@ public class VantageRegisterPageTests extends AppPage {
         }
     }
 
-    public void checkingWarningLabelsOfTheRegistrationForm(String role){
+    public void checkingWarningLabelsOfTheRegistrationForm(@NotNull String role){
 
         switch(role) {
             case "student":
                 Assert.assertTrue(vantageRegisterPage.lbl_FirstNameErrorMessage.isDisplayed());
                 Assert.assertTrue(vantageRegisterPage.lbl_LastNameErrorMessage.isDisplayed());
                 Assert.assertTrue(vantageRegisterPage.lbl_PasswordErrorMessage.isDisplayed());
-                Assert.assertTrue(vantageRegisterPage.lbl_Password2ErrorMessage.isDisplayed());
                 Assert.assertTrue(vantageRegisterPage.lbl_TermsOfUseErrorMessage.isDisplayed());
                 break;
 
@@ -154,7 +165,6 @@ public class VantageRegisterPageTests extends AppPage {
                 Assert.assertTrue(vantageRegisterPage.lbl_FirstNameErrorMessage.isDisplayed());
                 Assert.assertTrue(vantageRegisterPage.lbl_LastNameErrorMessage.isDisplayed());
                 Assert.assertTrue(vantageRegisterPage.lbl_PasswordErrorMessage.isDisplayed());
-                Assert.assertTrue(vantageRegisterPage.lbl_Password2ErrorMessage.isDisplayed());
                 Assert.assertTrue(vantageRegisterPage.lbl_TermsOfUseErrorMessage.isDisplayed());
                 break;
             default:

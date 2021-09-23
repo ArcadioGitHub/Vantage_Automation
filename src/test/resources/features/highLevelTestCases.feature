@@ -38,6 +38,25 @@ Feature: Vantage_Automation
       | student    |
       | instructor |
 
+  @EnrollStudent
+  Scenario Outline: Enroll Students to a course.
+    Given the user goes to the staging/Live page
+    When  the user performs the registration process as an <role>
+    And the instructor creates a course
+    Then the course should be created
+    When  the user performs the registration process as an <role2>
+    And the new student gets enrolled on the created course in a grace period
+    Then the student should see the course in his courses.
+    Then the student's name and last name should be in the Gradebook grid
+    When  another student performs the registration process
+    And the new student gets enrolled on the created course in a grace period
+    Then the student should see the course in his courses.
+    Then the student's name and last name should be in the Gradebook grid
+    Examples:
+      | role       | role2   |
+      | instructor | student |
+
+
 
 
 

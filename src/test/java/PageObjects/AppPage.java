@@ -20,7 +20,7 @@ public class AppPage extends PageObject {
     EnvironmentVariables environmentVariables;
     public static DocumentContext student;
     public static DocumentContext instructor;
-    String envBaseUrl;
+    public static String envBaseUrl;
     JSONObject envsData;
 
     public void getEnvAndUserData() {
