@@ -4,7 +4,6 @@ import Models.Instructor;
 import Models.Student;
 import com.jayway.jsonpath.DocumentContext;
 import com.jayway.jsonpath.JsonPath;
-import net.serenitybdd.core.Serenity;
 import net.serenitybdd.core.environment.EnvironmentSpecificConfiguration;
 import net.serenitybdd.core.pages.PageObject;
 import net.thucydides.core.util.EnvironmentVariables;
@@ -39,12 +38,6 @@ public class AppPage extends PageObject {
         }
     }
 
-   /* public void setup(){
-        Student.setStudent();
-        Instructor.setInstructor();
-    }
-    */
-
     public void goToHomeAndSetup() {
         getEnvAndUserData();
         Student.setStudent();
@@ -55,6 +48,5 @@ public class AppPage extends PageObject {
     public void closeBrowser(){
       getDriver().close();
     }
-
 }
 

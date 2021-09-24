@@ -14,12 +14,6 @@ public class VantageHomePageDefinitions {
     VantageHomePageTests vantageHomePageTests;
     AppPage appPage;
 
-    /*@Before
-    public void setup() {
-        appPage.goToHomeAndSetup();
-    }
-     */
-
     @After
     public void closeBrowser(){
         appPage.closeBrowser();
