@@ -7,6 +7,7 @@ import PageObjects.VantageHomePage;
 import PageObjects.VantageRegisterPage;
 import Utils.Constants;
 import net.serenitybdd.core.Serenity;
+import net.thucydides.core.annotations.Step;
 import org.jetbrains.annotations.NotNull;
 import org.junit.Assert;
 
@@ -23,101 +24,44 @@ public class VantageRegisterPageTests extends AppPage {
     Calendar calendar = Calendar.getInstance();
     String alias = String.valueOf(calendar.getTimeInMillis());
 
+    @Step
     public void registerUser(@NotNull String role){
         switch(role) {
             case "student":
-                studentName = Student.getFirstName().concat(alias);
-                studentLastName = Student.getLastName().concat(alias);
-                waitFor(vantageHomePage.btn_Register).waitUntilClickable();
-                vantageHomePage.btn_Register.click();
-                vantageRegisterPage.tfield_UserName.type(Student.getUserName().concat(alias));
-                vantageRegisterPage.tfield_Email.type(alias.concat(Student.getEmail()));
-                vantageRegisterPage.tfield_ReEnterEmail.type(alias.concat(Student.getEmail()));
-                Serenity.takeScreenshot();
-                vantageRegisterPage.btn_Register.click();
-                Assert.assertTrue(vantageRegisterPage.lbl_RegisterAsStudent.isDisplayed());
-                Serenity.takeScreenshot();
-                waitFor(vantageRegisterPage.tfield_FirstName).waitUntilVisible();
-                vantageRegisterPage.tfield_FirstName.type(studentName);
-                vantageRegisterPage.tfield_LastName.type(studentLastName);
-                vantageRegisterPage.sldr_Country.selectByVisibleText(Student.getCountry());
-                vantageRegisterPage.tfield_Password.type(Student.getPassword());
-                vantageRegisterPage.tfield_ConfirmPassword.type(Student.getPassword());
-                waitFor(vantageRegisterPage.chk_TermsOfUse).waitUntilEnabled();
-                vantageRegisterPage.chk_TermsOfUse.click();
-                vantageRegisterPage.chk_MarketingCommunication.click();
-                Serenity.takeScreenshot();
-                vantageRegisterPage.btn_Register.click();
+                registerStudentStepOne();
+                registerStudentStepTwo();
                 break;
 
             case "instructor":
-                instructorEmail = alias.concat(Instructor.getEmail());
-                waitFor(vantageHomePage.btn_SignUp).waitUntilClickable();
-                vantageHomePage.btn_SignUp.click();
-                vantageRegisterPage.tfield_Email.type(instructorEmail);
-                vantageRegisterPage.tfield_ReEnterEmail.type(instructorEmail);
-                Serenity.takeScreenshot();
-                vantageRegisterPage.btn_Register.click();
-                Assert.assertTrue(vantageRegisterPage.lbl_RegisterAsInstructor.isDisplayed());
-                Serenity.takeScreenshot();
-                vantageRegisterPage.sldr_InstructorTitle.selectByVisibleText(Instructor.getInstructorTitle());
-                vantageRegisterPage.tfield_FirstName.type(Instructor.getFirstName().concat(alias));
-                vantageRegisterPage.tfield_LastName.type(Instructor.getLastName().concat(alias));
-                vantageRegisterPage.sldr_Country.selectByVisibleText(Instructor.getCountry());
-                vantageRegisterPage.tfield_Institution.click();
-                vantageRegisterPage.tfield_Institution.type(Instructor.getInstitution());
-                vantageRegisterPage.tfield_DepartmentId.click();
-                waitFor(2).seconds();
-                vantageRegisterPage.tfield_DepartmentId.type(Instructor.getDepartment());
-                vantageRegisterPage.tfield_Password.type(Instructor.getPassword());
-                vantageRegisterPage.tfield_ConfirmPassword.type(Instructor.getPassword());
-                waitFor(vantageRegisterPage.chk_TermsOfUse).waitUntilEnabled();
-                vantageRegisterPage.chk_TermsOfUse.click();
-                vantageRegisterPage.chk_MarketingCommunication.click();
-                Serenity.takeScreenshot();
-                vantageRegisterPage.btn_Register.click();
+                registerInstructorStepOne();
+                registerInstructorStepTwo();
                 break;
             default:
         }
-
     }
 
+    @Step
     public void registeringAsAnStudentOrInstructorWithNotUserNameAndEmailAddress(@NotNull String role){
         switch(role) {
             case "student":
-                waitFor(vantageHomePage.btn_Register).waitUntilClickable();
-                vantageHomePage.btn_Register.click();
-                vantageRegisterPage.tfield_UserName.type("");
-                vantageRegisterPage.tfield_Email.type("");
-                vantageRegisterPage.tfield_ReEnterEmail.type("");
-                Serenity.takeScreenshot();
-                vantageRegisterPage.btn_Register.click();
+                Student.setUserName(""); Student.setEmail(""); alias = "";
+                registerStudentStepOne();
                 break;
 
             case "instructor":
-                waitFor(vantageHomePage.btn_SignUp).waitUntilClickable();
-                vantageHomePage.btn_SignUp.click();
-                vantageRegisterPage.tfield_Email.type("");
-                vantageRegisterPage.tfield_ReEnterEmail.type("");
-                Serenity.takeScreenshot();
-                vantageRegisterPage.btn_Register.click();
+                Instructor.setEmail(""); alias = "";
+                registerInstructorStepOne();
                 break;
             default:
         }
-
     }
 
+    @Step
     public void registeringAsAnStudentOrInstructorWithNoDataOnRegistrationForm(@NotNull String role){
         switch(role) {
             case "student":
                 Student.setPassword("ABCDE");
-                waitFor(vantageHomePage.btn_Register).waitUntilClickable();
-                vantageHomePage.btn_Register.click();
-                vantageRegisterPage.tfield_UserName.type(Student.getUserName().concat(alias));
-                vantageRegisterPage.tfield_Email.type(alias.concat(Student.getEmail()));
-                vantageRegisterPage.tfield_ReEnterEmail.type(alias.concat(Student.getEmail()));
-                Serenity.takeScreenshot();
-                vantageRegisterPage.btn_Register.click();
+                registerStudentStepOne();
                 Assert.assertTrue(vantageRegisterPage.lbl_RegisterAsStudent.isDisplayed());
                 Serenity.takeScreenshot();
                 vantageRegisterPage.tfield_Password.type(Student.getPassword());
@@ -131,12 +75,7 @@ public class VantageRegisterPageTests extends AppPage {
 
             case "instructor":
                 Instructor.setPassword("ABCDE");
-                waitFor(vantageHomePage.btn_SignUp).waitUntilClickable();
-                vantageHomePage.btn_SignUp.click();
-                vantageRegisterPage.tfield_Email.type(alias.concat(Instructor.getEmail()));
-                vantageRegisterPage.tfield_ReEnterEmail.type(alias.concat(Instructor.getEmail()));
-                Serenity.takeScreenshot();
-                vantageRegisterPage.btn_Register.click();
+                registerInstructorStepOne();
                 Assert.assertTrue(vantageRegisterPage.lbl_RegisterAsInstructor.isDisplayed());
                 Serenity.takeScreenshot();
                 vantageRegisterPage.tfield_Password.type(Instructor.getPassword());
@@ -149,8 +88,8 @@ public class VantageRegisterPageTests extends AppPage {
         }
     }
 
+    @Step
     public void checkingWarningLabelsOfTheRegistrationForm(@NotNull String role){
-
         switch(role) {
             case "student":
                 Assert.assertTrue(vantageRegisterPage.lbl_FirstNameErrorMessage.isDisplayed());
@@ -169,9 +108,9 @@ public class VantageRegisterPageTests extends AppPage {
                 break;
             default:
         }
-
     }
 
+    @Step
     public void checkingWarningLabelsForUserNameAndEmailAddress(@NotNull String role){
         switch(role) {
             case "student":
@@ -185,9 +124,9 @@ public class VantageRegisterPageTests extends AppPage {
                 break;
             default:
         }
-
     }
 
+    @Step
     public void checkingWelcomeMessages(@NotNull String role){
         switch(role) {
             case "student":
@@ -201,7 +140,64 @@ public class VantageRegisterPageTests extends AppPage {
                 break;
             default:
         }
-
     }
 
+    @Step
+    public void registerStudentStepOne(){
+        studentName = Student.getFirstName().concat(alias);
+        studentLastName = Student.getLastName().concat(alias);
+        waitFor(vantageHomePage.btn_Register).waitUntilClickable().and().click();
+        vantageRegisterPage.tfield_UserName.type(Student.getUserName().concat(alias));
+        vantageRegisterPage.tfield_Email.type(alias.concat(Student.getEmail()));
+        vantageRegisterPage.tfield_ReEnterEmail.type(alias.concat(Student.getEmail()));
+        Serenity.takeScreenshot();
+        vantageRegisterPage.btn_Register.click();
+    }
+
+    @Step
+    public void registerStudentStepTwo(){
+        Assert.assertTrue(vantageRegisterPage.lbl_RegisterAsStudent.isDisplayed());
+        Serenity.takeScreenshot();
+        waitFor(vantageRegisterPage.tfield_FirstName).waitUntilVisible().and().type(studentName);
+        vantageRegisterPage.tfield_LastName.type(studentLastName);
+        vantageRegisterPage.sldr_Country.selectByVisibleText(Student.getCountry());
+        vantageRegisterPage.tfield_Password.type(Student.getPassword());
+        vantageRegisterPage.tfield_ConfirmPassword.type(Student.getPassword());
+        waitFor(vantageRegisterPage.chk_TermsOfUse).waitUntilEnabled();
+        vantageRegisterPage.chk_TermsOfUse.click();
+        vantageRegisterPage.chk_MarketingCommunication.click();
+        Serenity.takeScreenshot();
+        vantageRegisterPage.btn_Register.click();
+    }
+
+    @Step
+    public void registerInstructorStepOne(){
+        instructorEmail = alias.concat(Instructor.getEmail());
+        waitFor(vantageHomePage.btn_SignUp).waitUntilClickable().and().click();
+        vantageRegisterPage.tfield_Email.type(instructorEmail);
+        vantageRegisterPage.tfield_ReEnterEmail.type(instructorEmail);
+        Serenity.takeScreenshot();
+        vantageRegisterPage.btn_Register.click();
+    }
+
+    @Step
+    public void registerInstructorStepTwo(){
+        Assert.assertTrue(vantageRegisterPage.lbl_RegisterAsInstructor.isDisplayed());
+        Serenity.takeScreenshot();
+        vantageRegisterPage.sldr_InstructorTitle.selectByVisibleText(Instructor.getInstructorTitle());
+        vantageRegisterPage.tfield_FirstName.type(Instructor.getFirstName().concat(alias));
+        vantageRegisterPage.tfield_LastName.type(Instructor.getLastName().concat(alias));
+        vantageRegisterPage.sldr_Country.selectByVisibleText(Instructor.getCountry());
+        vantageRegisterPage.tfield_Institution.click();
+        vantageRegisterPage.tfield_Institution.type(Instructor.getInstitution());
+        vantageRegisterPage.tfield_DepartmentId.click();
+        waitFor(2).seconds();
+        vantageRegisterPage.tfield_DepartmentId.type(Instructor.getDepartment());
+        vantageRegisterPage.tfield_Password.type(Instructor.getPassword());
+        vantageRegisterPage.tfield_ConfirmPassword.type(Instructor.getPassword());
+        waitFor(vantageRegisterPage.chk_TermsOfUse).waitUntilEnabled().and().click();
+        vantageRegisterPage.chk_MarketingCommunication.click();
+        Serenity.takeScreenshot();
+        vantageRegisterPage.btn_Register.click();
+    }
 }

@@ -14,14 +14,7 @@ public class MyCoursesPageDefinitions {
 
     @Steps
     MyCoursesPageTests myCoursesPageTests;
-    VantageHomePageTests vantageHomePageTests;
     AppPage appPage;
-
-    @Before
-    public void setup() {
-        appPage.getEnvAndUserData();
-        appPage.setup();
-    }
 
     @After
     public void closeBrowser(){

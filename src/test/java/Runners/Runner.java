@@ -11,5 +11,4 @@ import org.junit.runner.RunWith;
         glue = "Definitions",
         snippets = SnippetType.CAMELCASE )
 public class Runner {
-
 }

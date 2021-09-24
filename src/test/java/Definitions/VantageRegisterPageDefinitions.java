@@ -14,13 +14,6 @@ public class VantageRegisterPageDefinitions {
     VantageRegisterPageTests vantageRegisterPageTests;
     AppPage appPage;
 
-    @Before
-    public void setup() {
-        appPage.getEnvAndUserData();
-        appPage.setup();
-        appPage.goToHome();
-    }
-
     @After
     public void closeBrowser(){
         appPage.closeBrowser();

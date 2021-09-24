@@ -39,14 +39,17 @@ public class AppPage extends PageObject {
         }
     }
 
-    public void setup(){
+   /* public void setup(){
         Student.setStudent();
         Instructor.setInstructor();
     }
+    */
 
-    public void goToHome() {
+    public void goToHomeAndSetup() {
+        getEnvAndUserData();
+        Student.setStudent();
+        Instructor.setInstructor();
         getDriver().get(envBaseUrl);
-        Serenity.takeScreenshot();
     }
 
     public void closeBrowser(){

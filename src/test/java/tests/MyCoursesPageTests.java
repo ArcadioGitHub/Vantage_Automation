@@ -1,11 +1,10 @@
 package tests;
 
 import Models.Instructor;
-import Models.Student;
 import PageObjects.AppPage;
 import PageObjects.MyCoursesPage;
-import Utils.CommonMethods;
 import net.serenitybdd.core.pages.WebElementFacade;
+import net.thucydides.core.annotations.Step;
 import org.junit.Assert;
 
 public class MyCoursesPageTests extends AppPage {
@@ -15,8 +14,9 @@ public class MyCoursesPageTests extends AppPage {
     VantageRegisterPageTests vantageRegisterPageTests;
     public static String courseId;
 
+    @Step
     public void createCourse() {
-        myCoursesPage.lnk_CreateCourse.click();
+        waitFor(myCoursesPage.lnk_CreateCourse).waitUntilClickable().and().click();
         myCoursesPage.chk_BrowseForTitleByDiscipline.click();
         myCoursesPage.sldr_SelectDiscipline.selectByVisibleText("Anthropology");
         myCoursesPage.sldr_CourseArea.selectByVisibleText("Anthropology");
@@ -38,24 +38,26 @@ public class MyCoursesPageTests extends AppPage {
         myCoursesPage.btn_BackToMyCourses.click();
     }
 
+    @Step
     public void checkingCreatedCourse() {
         Assert.assertTrue(myCoursesPage.lbl_CourseId.getText().contains(courseId));
         logOut();
     }
 
+    @Step
     public void enrollNewStudentInGracePeriod() {
         myCoursesPage.btn_StartGracePeriod.click();
         myCoursesPage.tfield_EnterCourseId.type(courseId);
         myCoursesPage.btn_RegisterForCourse.click();
     }
 
+    @Step
     public void registerNewStudent() {
         logOut();
-        String email = CommonMethods.randomStringDate().concat(Student.getEmail());
-        Student.setEmail(email);
         vantageRegisterPageTests.registerUser("student");
     }
 
+    @Step
     public void checkingEnrolledStudentInGracePeriod() {
         Assert.assertTrue(myCoursesPage.btn_BuyAccessNow.isDisplayed());
         Assert.assertTrue(myCoursesPage.btn_RedeemAccess.isDisplayed());
@@ -66,6 +68,7 @@ public class MyCoursesPageTests extends AppPage {
         logOut();
     }
 
+    @Step
     public void checkingStudentsInTheGradebook() {
         String name = VantageRegisterPageTests.studentName;
         String lastName = VantageRegisterPageTests.studentLastName;
@@ -75,6 +78,7 @@ public class MyCoursesPageTests extends AppPage {
         Assert.assertTrue(student.isDisplayed());
     }
 
+    @Step
     public void logOut() {
         myCoursesPage.btn_OpenLogOut.click();
         myCoursesPage.btn_LogOut.click();

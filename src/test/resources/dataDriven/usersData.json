@@ -2,9 +2,9 @@
   "dev": {
     "instructor": {
       "role":"instructor",
-      "email":"AutomationInstructorDev@gmail.com",
+      "email":"InstructorDev@gmail.com",
       "title":"Dr",
-      "firstName": "AutomationInstructorDev",
+      "firstName": "InstructorDev",
       "lastName":"lastName",
       "country":"United States",
       "institution":"SAGE Institution",
@@ -13,10 +13,10 @@
     },
     "student": {
       "role": "student",
-      "userName": "AutomationStudentDev",
-      "email": "AutomationStudentDev@gmail.com",
-      "firstName": "AutomationStudentDev",
-      "lastName":"lastName",
+      "userName": "StudentDev",
+      "email": "StudentDev@gmail.com",
+      "firstName": "StudentDev",
+      "lastName":"Dev",
       "country":"United States",
       "password":"Test123!"
     },
@@ -28,10 +28,10 @@
   "staging":{
     "instructor": {
       "role":"instructor",
-      "email":"AutomationInstructorStaging@gmail.com",
+      "email":"InstructorStage@gmail.com",
       "title":"Dr",
-      "firstName": "AutomationInstructorStaging",
-      "lastName":"lastName",
+      "firstName": "Instructor",
+      "lastName":"Stage",
       "country":"United States",
       "institution":"SAGE Institution",
       "department":"Editorial",
@@ -39,9 +39,9 @@
     },
     "student": {
       "role": "student",
-      "userName": "AutomationStudentStaging",
-      "email": "AutomationStudentStaging@gmail.com",
-      "firstName": "AutomationStudentStaging",
+      "userName": "StudentStage",
+      "email": "StudentStage@gmail.com",
+      "firstName": "Student",
       "lastName":"lastName",
       "country":"United States",
       "password":"Test123!"

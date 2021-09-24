@@ -14,11 +14,11 @@ public class VantageHomePageDefinitions {
     VantageHomePageTests vantageHomePageTests;
     AppPage appPage;
 
-    @Before
+    /*@Before
     public void setup() {
-        appPage.getEnvAndUserData();
-        appPage.setup();
+        appPage.goToHomeAndSetup();
     }
+     */
 
     @After
     public void closeBrowser(){
@@ -27,7 +27,7 @@ public class VantageHomePageDefinitions {
 
     @Given("^the user goes to the staging/Live page$")
     public void theUserGoesToTheStagingLivePage() {
-        appPage.goToHome();
+        appPage.goToHomeAndSetup();
     }
 
     @Then("^the user should see all page elements$")
